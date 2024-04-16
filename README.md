@@ -1,2 +1,2 @@
-## GEMINI 
+## CLONE GEMINI APP
 
