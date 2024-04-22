@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Sidebar.css";
 import { assets } from "../../assets/assets";
+import { Context } from "../../context/Context";
 
 const Sidebar = () => {
   const [extented, setExtented] = useState(false);
+  const { onSent, prevPrompt, setRecentPrompt } = useContext(Context);
 
   return (
     <div className="sidebar">
       <div className="top">
-        <img onClick={() => setExtented((prev)=>!prev)} className="menu" src={assets.menu_icon} alt="" />
+        <img
+          onClick={() => setExtented((prev) => !prev)}
+          className="menu"
+          src={assets.menu_icon}
+          alt=""
+        />
         <div className="new-chat">
           <img src={assets.plus_icon} alt="" />
           {extented ? <p>New Chat</p> : null}
@@ -16,10 +23,14 @@ const Sidebar = () => {
         {extented ? (
           <div className="recent">
             <p className="recent-title">Recent</p>
-            <div className="recent-entry">
-              <img src={assets.message_icon} alt="" />
-              <p>What is React ...</p>
-            </div>
+            {prevPrompt.map((item, index) => {
+              return (
+                <div className="recent-entry">
+                  <img src={assets.message_icon} alt="" />
+                  <p>{item.slice(0, 15)} ...</p>
+                </div>
+              );
+            })}
           </div>
         ) : null}
       </div>
@@ -27,15 +38,15 @@ const Sidebar = () => {
       <div className="bottom">
         <div className="bottom-item recent-entry">
           <img src={assets.question_icon} alt="" />
-          {extented?<p>Help</p>:null}
+          {extented ? <p>Help</p> : null}
         </div>
         <div className="bottom-item recent-entry">
           <img src={assets.history_icon} alt="" />
-          {extented?<p>Activity</p>:null}
+          {extented ? <p>Activity</p> : null}
         </div>
         <div className="bottom-item recent-entry">
           <img src={assets.setting_icon} alt="" />
-          {extented?<p>Settings</p>:null}
+          {extented ? <p>Settings</p> : null}
         </div>
       </div>
     </div>
