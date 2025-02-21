@@ -23,9 +23,11 @@ const ContextProvider = (props) => {
     setShowResult(false)
   }
 
+;
+
   const onSent = async (prompt) => {
     setResultData("")
-    setLoading(loading)
+    setLoading(true)
     setShowResult(true)
     let response;
     if (prompt !== undefined) {
@@ -35,7 +37,7 @@ const ContextProvider = (props) => {
     else {
       setPrevPrompt(prev=>[...prev, input])
       setRecentPrompt(input)
-      response = await runChat(input)
+      response = await runChat(input)      
     }
     
     let responseArray = response.split("**");
